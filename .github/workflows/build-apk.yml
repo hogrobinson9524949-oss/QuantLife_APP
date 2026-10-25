@@ -1,29 +1,23 @@
-name: Build APK
+name: Debug Folders
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  debug:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-      
-      # 第一步：直接获取依赖
-      - name: Install dependencies
-        run: flutter pub get
-      
-      # 第二步：直接打包，不需要进入任何文件夹
-      - name: Build APK
-        run: flutter build apk --release --build-name=0.3.0 --build-number=10
-      
-      # 第三步：上传打包好的文件
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: QuantLife-latest-APK
-          path: build/app/outputs/flutter-apk/app-release.apk
+      - name: List all folders
+        run: |
+          echo "🔍 正在扫描仓库根目录下的所有文件和文件夹："
+          echo "----------------------------------"
+          find . -maxdepth 1 -type d
+          echo "----------------------------------"
+          echo ""
+          echo "🔍 正在全局寻找 pubspec.yaml（Flutter 项目标识文件）："
+          echo "----------------------------------"
+          find . -name "pubspec.yaml"
+          echo "----------------------------------"
