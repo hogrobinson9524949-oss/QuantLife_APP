@@ -13,18 +13,17 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
       
+      # 第一步：直接获取依赖
       - name: Install dependencies
-        run: |
-          cd QuantLife_APP/
-          flutter pub get
+        run: flutter pub get
       
+      # 第二步：直接打包，不需要进入任何文件夹
       - name: Build APK
-        run: |
-          cd QuantLife_APP/
-          flutter build apk --release --build-name=0.3.0 --build-number=10
+        run: flutter build apk --release --build-name=0.3.0 --build-number=10
       
+      # 第三步：上传打包好的文件
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: QuantLife-latest-APK
-          path: QuantLife_APP/build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
