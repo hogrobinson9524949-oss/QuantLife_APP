@@ -9,14 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: stable
-      
-      - name: Set up project
-        run: |
-          if [ -d "QuantLife_APP" ]; then
-            mv QuantLife_APP/* . && rm -rf QuantLife_APP
-          fi
 
       - run: flutter pub get
       - run: flutter build apk --release --build-name=0.3.0
